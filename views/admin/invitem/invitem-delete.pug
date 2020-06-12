@@ -1,0 +1,12 @@
+extends ../../layout.pug
+
+block panel
+
+    div(class="jumbotron text-xs-center")
+        h1(class="display-3") #{name}
+        p(class="lead") #[i(class="fas fa-exclamation-triangle text-warning")] Deleting this is permenant. Are you sure?
+        p Having trouble? #[a(href="mailto:chris_whitman@wgresorts.com") Contact us]
+
+        hr
+        p(class="lead")
+            a(class="font-weight-medium btn btn-danger" href= "/hotel/delete_submit/" + sams_id) Delete #[a(class="font-weight-medium btn btn-default" href="/"  onclick="history.back()" ) Cancel]

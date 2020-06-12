@@ -1,0 +1,262 @@
+// Bootstrap Resets
+.jumbotron {
+    background-color: transparent;
+}
+
+.tab-content {
+    padding: 1.25rem;
+    background-color: #fff;
+
+    .tab-pane {
+        h4 {
+            margin-top: 2rem;
+        }
+
+        .form-check {
+            margin: 0.25rem 0;
+        }
+    }
+}
+
+.form-control {
+    font-size: 0.825rem;
+    line-height: normal;
+
+    padding: 0.25rem 0.5rem;
+}
+
+.footnote {
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+    color: hsla(224, 10%, 40%, 1);
+    text-transform: uppercase;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+// Tab Navigation
+.nav-tabs {
+    border: none;
+    font-family: $type1_bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+
+    .nav-item {
+        margin-bottom: 0;
+    }
+
+    .nav-link {
+    	padding: 0.625rem 1.25rem;
+        border-radius: 0;
+        border: none;
+        border-top: 4px solid transparent;
+        color: $inactivetab;
+        line-height: 1.5;
+
+        span {
+            font-family: $type1_light;
+            font-size: 0.875rem;
+            text-transform: none;
+            display: block;
+        }
+
+        &:focus,
+        &:hover {
+            border: none;
+            border-top: 4px solid transparent;
+        }
+
+        &.active {
+            border-top: 4px solid $green;
+        }
+    }
+}
+
+.utility-nav {
+    a {
+        padding: 0 1rem;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    a:last-child {
+        border-left: 1px solid white;
+    }
+}
+
+.recent-list {
+    .list-group-item{
+        hidden: overflow;
+
+        .heading {
+            margin: 0;
+        }
+
+        .action-buttons {
+        }
+    }
+}
+
+.metabox {
+    background: #ffffff;
+
+    .meta-tools {
+        margin-top: 5px;
+
+        a {
+            padding: 0 0.625rem;
+            border-right: 1px solid $darkslategray;
+            color: $darkslategray;
+            text-decoration: underline;
+        }
+
+        a:first-child {
+            padding-left: 0;
+        }
+
+        a:last-child {
+            border: none;
+        }
+    }
+}
+
+.meta-nav:after {
+    content: "|";
+    padding-left: 5px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #EFF3F6 !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table th,
+.table td {
+    vertical-align: top;
+}
+
+form p {
+    margin-bottom: 0.625rem;
+}
+
+.btn-basic {
+    color: #555;
+    border-color: #ccc;
+    background: #f7f7f7;
+    box-shadow: 0 1px 0 #ccc;
+    padding: 10px 20px;
+}
+
+input,
+textarea {
+	margin-top: 5px;
+}
+
+input.form-control,
+textarea.form-control,
+.custom-select {
+	border: 1px solid lighten($inactivetab, 30%);
+}
+
+.input-group-append,
+.input-group-prepend {
+    margin-top: 5px;
+    border: 1px solid #c0c0c3;
+}
+
+.input-group-append .input-group-text,
+.input-group-prepend .input-group-text {
+    color: $darkslategray;
+    padding: 0 0.75rem;
+}
+
+.form-check-input {
+    margin-top: 0.2rem;
+    margin-left: 0;
+}
+
+.has-image {
+    position: relative;
+
+    .hover{
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        -webkit-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+        -moz-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+        -o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+        transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+        visibility: hidden;
+        opacity: 0;
+
+        .remove_image {
+            background: url(/images/sprites/sprite.png) -16px -116px no-repeat #fff;
+            background-position: -64px -214px;
+            display: block;
+            width: 22px;
+            height: 22px;
+            border-radius: 11px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+            -webkit-transition: none;
+            -moz-transition: none;
+            -o-transition: none;
+            transition: none;
+        }
+    }
+
+    &:hover .hover {
+        cursor: pointer;
+        -webkit-transition-delay: 0s;
+        -moz-transition-delay: 0s;
+        -o-transition-delay: 0s;
+        transition-delay: 0s;
+        visibility: visible;
+        opacity: 1;
+
+        .remove_image:hover {
+            background-position: -64px -264px;
+        }
+    }
+}
+
+.custom-select {
+	margin-top: 5px;
+	background: none;
+}
+
+.checkbox {
+    label {
+        display: block;
+    }
+    input[type="checkbox"] {
+        margin: 0;
+    }
+}
+
+// Publishing Actions Box
+.publishing-actions {
+
+    p {
+        margin: 0.5rem 0;
+    }
+
+    .card-header {
+        font-weight: bold;
+        font-size: 1.15rem;
+    }
+
+    .btn {
+        padding-left: 0.825rem;
+        padding-right: 0.825rem;
+    }
+}
+
+.card {
+    margin-bottom: 20px;
+    border: 1px solid lighten(gray, 25%);
+}

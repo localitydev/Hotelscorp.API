@@ -1,0 +1,10 @@
+extends ../../layout.pug
+
+block panel
+    form(ref='uploadForm', id='uploadForm', action='/hotel/upload', method='post', encType="multipart/form-data")
+        <input type="file" name="things1" multiple><br>
+        <input type="file" name="things2" multiple><br>
+        <input type="file" name="things3" multiple><br>
+        <input type="file" name="things4" multiple><br>
+        <input type="file" name="things5" multiple>
+        <input type="submit" value="Upload">

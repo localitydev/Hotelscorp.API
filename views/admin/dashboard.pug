@@ -1,0 +1,48 @@
+extends ../layout.pug
+
+block panel
+
+    .content-wrapper
+        .page-header
+            h2.page-title Recently Added
+        .row
+            .col#interest_add
+
+                .panel.panel-primary
+                    //- .panel-heading
+                    //-     span.glyphicon.glyphicon-list Sortable Lists
+                    //-     .pull-right.action-buttons
+                    //-         .btn-group.pull-right
+                    //-             button.btn.btn-default.btn-xs.dropdown-toggle(type="button", data-toggle="dropdown")
+                    //-                 span.glyphicon.glyphicon-cog(style="margin-right: 0px;")
+                    //-             ul.dropdown-menu.slidedown
+                    //-                 li
+                    //-                     a(href="http://www.jquery2dotnet.com") #[span.glyphicon.glyphicon-pencil] Edit
+                    //-                 li
+                    //-                     a(href="http://www.jquery2dotnet.com") #[span.glyphicon.glyphicon-trash] Delete
+                    //-                 li
+                    //-                     a(href="http://www.jquery2dotnet.com") #[span.glyphicon.glyphicon-flag] Flag
+
+
+                    table.table.table-striped.table-hover
+                        tbody
+                            tr
+                                th Name
+                                th.text-right Created
+                                th.text-right Tools
+                            tr
+                                td List group item heading 1
+                                td.text-right 2018-10-10
+                                td.text-right
+                                    a(href="http://www.jquery2dotnet.com")
+                                        i.fas.fa-pencil-alt
+                                    a(href="http://www.jquery2dotnet.com")
+                                        i.fas.fa-trash-alt
+                            tr
+                                td List group item heading 1
+                                td.text-right 2018-10-10
+                                td.text-right
+                                    a(href="http://www.jquery2dotnet.com")
+                                        i.fas.fa-pencil-alt
+                                    a(href="http://www.jquery2dotnet.com")
+                                        i.fas.fa-trash-alt

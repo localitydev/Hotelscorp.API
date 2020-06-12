@@ -1,0 +1,16 @@
+extends ../layout.pug
+
+block panel
+
+    div(class="jumbotron text-xs-center")
+        h1(class="display-3") #[i(class="text-danger fas fa-exclamation-circle")] ERROR.
+        p(class="lead") #[strong Something went wrong. Please try again.]
+        p(class="lead") #[strong #{message}]
+
+        hr
+        p Having trouble? #[a(href="mailto:chris_whitman@wgresorts.com") Contact us]
+        p(class="lead")
+            if back_button
+                a(class="font-weight-medium btn btn-primary" href= back_button.link) #{back_button.label}
+            if return_button
+                a(class="font-weight-medium btn btn-default" href= return_button.link) #{return_button.label}

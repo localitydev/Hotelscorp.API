@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        title HCI Content Management System
+        <!-- plugins:css -->
+        link(rel="stylesheet", href="/vendors/iconfonts/mdi/css/materialdesignicons.min.css")
+        link(rel="stylesheet", href="/vendors/css/vendor.bundle.base.css")
+        <!-- endinject -->
+
+        <!-- inject:css -->
+        link(rel="stylesheet", href="/css/style.css")
+        <!-- endinject -->
+        link(rel="shortcut icon", href="/images/favicon.png")
+
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous")
+
+        script(src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=qu6470jyiaozclp0urd9pfnc5rq7jyy1t3c0c4etx59ayckc")
+        <script>tinymce.init({ selector:'textarea' });</script>
+    body
+        .container-scroller
+
+            .container-fluid.page-body-wrapper
+
+                include includes/nav
+
+                .main-panel
+                    block panel
+
+                    include includes/footer
+
+        include includes/scripts

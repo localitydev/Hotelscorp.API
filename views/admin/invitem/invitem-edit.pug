@@ -1,0 +1,329 @@
+extends ../../layout.pug
+
+block panel
+    form.content-wrapper(method="post", action= "/hotel/update/" + sams_id)
+        .page-header
+            h2.page-title HOTEL / #[span #{name}]
+        .row
+            .col#interest_add
+                ul.nav.nav-tabs#myTab(role="tablist")
+                    li.nav-item
+                        a.nav-link.active#home-tab(data-toggle="tab", href="#home", role="tab", aria-controls="home", aria-selected="true") Hotel Details
+                    //- li.nav-item
+                        a.nav-link#rooms-tab(data-toggle="tab" href="#rooms" role="tab" aria-controls="rooms" aria-selected="false") Rooms
+                    li.nav-item
+                        a.nav-link#business-tab(data-toggle="tab" href="#business" role="tab" aria-controls="business" aria-selected="false") Business
+                    li.nav-item
+                        a.nav-link#english-tab(data-toggle="tab", href="#english", role="tab", aria-controls="english", aria-selected="false") English
+                    li.nav-item
+                        a.nav-link#spanish-tab(data-toggle="tab" href="#spanish" role="tab" aria-controls="spanish" aria-selected="false") Spanish
+
+
+                .tab-content#myTabContent
+
+                    //- Hotel Details -->
+                    .tab-pane.fade.show.active#home(role="tabpanel" aria-labelledby="home-tab")
+
+                        //-Hotel Name
+                        .form-group
+                            label(for="name") #[strong Hotel Name]
+                            input.form-control(name="name", type="text", value= name)
+
+                        //- ADDRESS -->
+                        .form-group
+                            label(for="address") #[strong Address]
+                            small.form-text Example format: #[em 1600 Amphitheatre Parkway, Mountain View, CA]
+
+                            input#address.form-control(name="address", type="text", required, value= address)
+
+                        //- Phone Number -->
+                        .form-group
+                            label(for="phone_number") #[strong Phone Number]
+                            small.form-text Example format: #[em 850-867-5309]
+
+                            input#phone_number.form-control(name="phone_number", type="text", value= phone_number)
+
+                        //- DESTINATION -->
+                        .form-group
+                            label(for="destination") #[strong Destination]
+                            small.form-text Where is this #[strong Hotel] located?
+
+                            div.input-group
+                                select#destination.custom-select(name="destination")
+                                    option(value="ANAHEIM", selected= destination=="ANAHEIM") ANAHEIM
+                                    option(value="BRANSON", selected= destination=="BRANSON") BRANSON
+                                    option(value="CANCUN", selected= destination=="CANCUN") CANCUN
+                                    option(value="COCOA BEACH", selected= destination=="COCOA BEACH") COCOA BEACH
+                                    option(value="DAYTONA BEACH", selected= destination=="DAYTONA BEACH") DAYTONA BEACH
+                                    option(value="GATLINBURG", selected= destination=="GATLINBURG") GATLINBURG
+                                    option(value="HOUSTON", selected= destination=="HOUSTON") HOUSTON
+                                    option(value="LAS VEGAS", selected= destination=="LAS VEGAS") LAS VEGAS
+                                    option(value="MESA", selected= destination=="MESA") MESA
+                                    option(value="MIAMI", selected= destination=="MIAMI") MIAMI
+                                    option(value="MYRTLE BEACH", selected= destination=="MYRTLE BEACH") MYRTLE BEACH
+                                    option(value="NEW TORK CITY", selected= destination=="NEW TORK CITY") NEW TORK CITY
+                                    option(value="OCOEE", selected= destination=="OCOEE") OCOEE
+                                    option(value="ORLANDO", selected= destination=="ORLANDO") ORLANDO
+                                    option(value="ORLANDO SOUTH", selected= destination=="ORLANDO SOUTH") ORLANDO SOUTH
+                                    option(value="PARK CITY", selected= destination=="PARK CITY") PARK CITY
+                                    option(value="PORT CANAVERAL", selected= destination=="PORT CANAVERAL") PORT CANAVERAL
+                                    option(value="PORT EVERGLADES", selected= destination=="PORT EVERGLADES") PORT EVERGLADES
+                                    option(value="TEST LOCATION", selected= destination=="TEST LOCATION") TEST LOCATION
+                                    option(value="TUNICA", selected= destination=="TUNICA") TUNICA
+                                    option(value="WILLIAMSBURG", selected= destination=="WILLIAMSBURG") WILLIAMSBURG
+                                    option(value="UNCATERGORIZED", selected= destination=="UNCATERGORIZED") UNCATERGORIZED
+
+                        //- STAR RATING -->
+                        .form-group
+                            label(for="star_rating") #[strong Star Rating]
+                            input#address.form-control(name="star_rating", type="number", required, step=".5", min="0", max="5", value= star_rating)
+
+                        //- EXPEDIA -->
+                        .form-group
+                            label(for="expedia_link") #[strong Expedia Link]
+                            input.form-control(name="expedia_link",type="text", value= expedia)
+
+                        //- HOTEL AMENITIES
+                        h4 Hotel Amenities
+                        .container-fluid
+                            .row
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_flat_screen_tv", value="ha_flat_screen_tv", checked= (amenities.indexOf("ha_flat_screen_tv") > -1))
+                                    label.form-check-label(for="ha_flat_screen_tv") Flat Screen TV
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_free_wifi", value="ha_free_wifi", checked= (amenities.indexOf("ha_free_wifi") > -1))
+                                    label.form-check-label(for="ha_free_wifi") Free Wifi
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_pool", value="ha_pool", checked= (amenities.indexOf("ha_pool") > -1))
+                                    label.form-check-label(for="ha_pool") Pool
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_breakfast", value="ha_breakfast", checked= (amenities.indexOf("ha_breakfast") > -1))
+                                    label.form-check-label(for="ha_breakfast") Breakfast
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_pet_friendly", value="ha_pet_friendly", checked= (amenities.indexOf("ha_pet_friendly") > -1))
+                                    label.form-check-label(for="ha_pet_friendly") Pet Friendly
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_accessibility", value="ha_accessibility", checked= (amenities.indexOf("ha_accessibility") > -1))
+                                    label.form-check-label(for="ha_accessibility") Accessibility
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_self-parking", value="ha_self-parking", checked= (amenities.indexOf("parking") > -1))
+                                    label.form-check-label(for="ha_self-parking") Self-Parking
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_bar", value="ha_bar", checked= (amenities.indexOf("ha_bar") > -1))
+                                    label.form-check-label(for="ha_bar") Bar/Lounge
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_spa", value="ha_spa", checked= (amenities.indexOf("ha_spa") > -1))
+                                    label.form-check-label(for="ha_spa") Spa
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_restaurant", value="ha_restaurant", checked= (amenities.indexOf("ha_restaurant") > -1))
+                                    label.form-check-label(for="ha_restaurant") Restaurant
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_park_shuttle", value="ha_park_shuttle", checked= (amenities.indexOf("ha_park_shuttle") > -1))
+                                    label.form-check-label(for="ha_park_shuttle") Theme Park Shuttle
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_gym", value="ha_gym", checked= (amenities.indexOf("ha_gym") > -1))
+                                    label.form-check-label(for="ha_gym") ATM
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_business_center", value="ha_business_center", checked= (amenities.indexOf("ha_business_center") > -1))
+                                    label.form-check-label(for="ha_business_center") Business Center
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_conference_space", value="ha_conference_space", checked= (amenities.indexOf("ha_conference_space") > -1))
+                                    label.form-check-label(for="ha_conference_space") Conference Space
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_room_service", value="ha_room_service", checked= (amenities.indexOf("ha_room_service") > -1))
+                                    label.form-check-label(for="ha_room_service") Room Service
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_picnic_area", value="ha_picnic_area", checked= (amenities.indexOf("ha_picnic_area") > -1))
+                                    label.form-check-label(for="ha_picnic_area") Picnic Area
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_elevator", value="ha_elevator", checked= (amenities.indexOf("ha_elevator") > -1))
+                                    label.form-check-label(for="ha_elevator") Elevator
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_barbecue_grill", value="ha_barbecue_grill", checked= (amenities.indexOf("ha_barbecue_grill") > -1))
+                                    label.form-check-label(for="ha_barbecue_grill") Barbecue Grill(s)
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_laundry_facilities", value="ha_laundry_facilities", checked= (amenities.indexOf("ha_laundry_facilities") > -1))
+                                    label.form-check-label(for="ha_laundry_facilities") Laundry Facilities
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_arcade", value="ha_arcade", checked= (amenities.indexOf("ha_arcade") > -1))
+                                    label.form-check-label(for="ha_arcade") Arcade/Game Room
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_24hr_front_desk", value="ha_24hr_front_desk", checked= (amenities.indexOf("ha_24hr_front_desk") > -1))
+                                    label.form-check-label(for="ha_24hr_front_desk") 24 hr Front Desk
+
+                                .form-check.col-4
+                                    input.form-check-input(type="checkbox", name="hotel_amenities", id="ha_casino", value="ha_casino", checked= (amenities.indexOf("ha_casino") > -1))
+                                    label.form-check-label(for="ha_casino") Casino
+
+                    //- Room Data
+                    .tab-pane.fade#rooms(role="tabpanel", aria-labelledby="rooms-tab")
+
+
+                        //- SAMS Room Type
+                        .form-group
+                            label(for="") #[strong SAMS Room Type]
+                            input.form-control(name="", type="text")
+
+                        //- Title
+                        .form-group
+                            label(for="") #[strong Room Title]
+                            input.form-control(name="", type="text")
+
+                        //- Description
+                        .form-group
+                            label(for="") #[strong Description]
+                            textarea.form-control(name="", type="text")
+
+                        //- Images
+                        //- .form-group
+                        //-     label(for="") #[strong Images]
+                        //-     input#.form-control(name="", type="text")
+
+                        //- Occupancy
+                        .form-group
+                            label(for="") #[strong Occupancy]
+                            input.form-control(name="", type="number")
+
+                    //- English Descriptions -->
+                    .tab-pane.fade#english(role="tabpanel", aria-labelledby="english-tab")
+                        //- Short Description
+                        .form-group
+                            label(for="short_description") #[strong Short Description]
+                            textarea.form-control#short_description(name="short_description", rows="5") #{languages.english.short_description}
+
+                        //- Location Description
+                        .form-group
+                            label(for="long_description") #[strong Long Description]
+                            textarea.form-control#long_description(name="long_description", rows="5") #{languages.english.long_description}
+
+                        //- Dining
+                        .form-group
+                            label(for="dining") #[strong Dining]
+                            textarea.form-control#dining(name="dining", rows="5") #{languages.english.dining}
+
+                        //- Entertainment
+                        .form-group
+                            label(for="entertainment") #[strong Entertainment]
+                            textarea.form-control#entertainment(name="entertainment", rows="5") #{languages.english.entertainment}
+
+                        //- POINTS OF INTEREST
+                        .form-group
+                            label(for="points_of_interest") #[strong Points of Interest]
+                            textarea.form-control#points_of_interest(name="points_of_interest", rows="5") #{languages.english.points_of_interest}
+
+                        //- POLICIES
+                        .form-group
+                            label(for="policies") #[strong Policies]
+                            textarea.form-control#policies(name="policies", rows="5") #{languages.english.policies}
+
+                        //- LOCATION
+                        .form-group
+                            label(for="location_description") #[strong Location]
+                            textarea.form-control#location_description(name="location_description", rows="5") #{languages.english.location}
+
+                    //- Spanish Descriptions -->
+                    .tab-pane.fade#spanish(role="tabpanel", aria-labelledby="spanish-tab")
+                        //- Short Description
+                        .form-group
+                            label(for="short_description_es") #[strong Short Description]
+                            textarea.form-control#short_description_es(name="short_description_es", rows="5") #{languages.espanol.short_description}
+
+                        //- Location Description
+                        .form-group
+                            label(for="long_description_es") #[strong Long Description]
+                            textarea.form-control#long_description_es(name="long_description_es", rows="5") #{languages.espanol.long_description}
+
+                        //- Dining
+                        .form-group
+                            label(for="dining_es") #[strong Dining]
+                            textarea.form-control#dining_es(name="dining_es", rows="5") #{languages.espanol.dining}
+
+                        //- Entertainment
+                        .form-group
+                            label(for="entertainment_es") #[strong Entertainment]
+                            textarea.form-control#entertainment_es(name="entertainment_es", rows="5") #{languages.espanol.entertainment}
+
+                        //- POINTS OF INTEREST
+                        .form-group
+                            label(for="points_of_interest_es") #[strong Points of Interest]
+                            textarea.form-control#points_of_interest_es(name="points_of_interest_es", rows="5") #{languages.espanol.points_of_interest}
+
+                        //- POLICIES
+                        .form-group
+                            label(for="policies_es") #[strong Policies]
+                            textarea.form-control#policies_es(name="policies_es", rows="5") #{languages.espanol.policies}
+
+                        //- LOCATION
+                        .form-group
+                            label(for="location_description_es") #[strong Location]
+                            textarea.form-control#location_description_es(name="location_description_es", rows="5") #{languages.espanol.location}
+
+                    //- Business Data
+                    .tab-pane.fade#business(role="tabpanel", aria-labelledby="business-tab")
+                        //-SAMS HOTEL ID
+                        h4 SAMS Hotel ID
+                        .form-group
+                            input.form-control(name="sams_id", type="text", value= sams_id, readonly)
+
+                        h4 Active Hotel
+                        .input-group
+                            .checkbox
+                                label(for="activeHotel")
+                                    input#activeHotel(type="checkbox", name="activeHotel", checked= isActive)
+                                    span Hotel is Active
+
+                        //- RIBBON
+                        h4 Ribbon
+                        .form-check
+                            input.form-check-input(type="radio", name="ribbon", id="field_none", value="none", checked= (ribbon == "none"))
+                            label.form-check-label(for="field_none") None
+
+                        .form-check
+                            input.form-check-input(type="radio", name="ribbon", id="field_top_rated", value="top_rated", checked= (ribbon == "top_rated"))
+                            label.form-check-label(for="field_top_rated") Top Rated
+
+                        .form-check
+                            input.form-check-input(type="radio", name="ribbon", id="field_popular", value="popular", checked= (ribbon == "popular"))
+                            label.form-check-label(for="field_popular") Popular
+
+                        .form-check
+                            input.form-check-input(type="radio", name="ribbon", id="field_great_value", value="great_value", checked= (ribbon == "great_value"))
+                            label.form-check-label(for="field_great_value") Great Value
+
+                        .form-check
+                            input.form-check-input(type="radio", name="ribbon", id="field_pet_friendly", value="pet_friendly", checked= (ribbon == "pet_friendly"))
+                            label.form-check-label(for="field_pet_friendly") Pet Friendly
+
+            .col-lg-4
+                .card.card-primary.publishing-actions
+                    .card-header Publish
+                    .card-body
+                        p #[strong Created by:] #{createdBy}
+                        p #[strong Last Modified by:] #{modifiedBy}
+                        p #[strong Created on:] #{created}
+                        p #[strong Last modified on:] #{modified}
+                        hr
+                        div.clearfix
+                            a.btn.btn-default.float-left(href= "/hotel/delete/" + sams_id) Move to Trash
+                            button.btn.btn-primary.float-right(type="submit") Save Hotel
+

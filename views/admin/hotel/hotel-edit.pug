@@ -1,0 +1,559 @@
+extends ../../layout.pug
+
+block panel
+    form.content-wrapper(method="post", action= "/hotel/update/" + sams_id, encType="multipart/form-data")
+        .page-header
+            h2.page-title HOTEL / #[span #{name}]
+        .row
+            .col#interest_add
+                ul.nav.nav-tabs#myTab(role="tablist")
+                    li.nav-item
+                        a.nav-link.active#home-tab(data-toggle="tab", href="#home", role="tab", aria-controls="home", aria-selected="true") Hotel Details
+                    li.nav-item
+                        a.nav-link#rooms-tab(data-toggle="tab" href="#rooms" role="tab" aria-controls="rooms" aria-selected="false") Rooms
+                    li.nav-item
+                        a.nav-link#business-tab(data-toggle="tab" href="#business" role="tab" aria-controls="business" aria-selected="false") Business
+                    li.nav-item
+                        a.nav-link#english-tab(data-toggle="tab", href="#english", role="tab", aria-controls="english", aria-selected="false") English
+                    li.nav-item
+                        a.nav-link#spanish-tab(data-toggle="tab" href="#spanish" role="tab" aria-controls="spanish" aria-selected="false") Spanish
+
+
+                .tab-content#myTabContent
+
+                    //- Hotel Details -->
+                    .tab-pane.fade.show.active#home(role="tabpanel" aria-labelledby="home-tab")
+
+                        //- Hotel Name
+                        .form-group
+                            label(for="name") #[strong Hotel Name]
+                            input.form-control(name="name", type="text", value= name)
+
+                        //- SAMS HOTEL ID
+                        .form-group
+                            label(for="name") #[strong SAMS ID]
+                            small.form-text
+                                em Numerical identifier in SAMS for this hotel
+                            input.form-control(name="sams_id", type="number", readonly, value= sams_id)
+
+                        //- MANUALLY SETTING ACTIVE HOTELS
+                        .form-group
+                            label(for="activeHotel") #[strong Active Hotel]
+                            .checkbox
+                                label(for="activeHotel")
+                                    input#activeHotel(type="checkbox", name="activeHotel", checked= isActive)
+                                    span Hotel is Active
+
+                        //- RIBBON
+                        .form-group
+                            strong Ribbon
+                            .form-check
+                                input.form-check-input(type="radio", name="ribbon", id="field_none", value="none", checked= (ribbon == "none"))
+                                label.form-check-label(for="field_none") None
+
+                            .form-check
+                                input.form-check-input(type="radio", name="ribbon", id="field_top_rated", value="top_rated", checked= (ribbon == "top_rated"))
+                                label.form-check-label(for="field_top_rated") Top Rated
+
+                            .form-check
+                                input.form-check-input(type="radio", name="ribbon", id="field_popular", value="popular", checked= (ribbon == "popular"))
+                                label.form-check-label(for="field_popular") Popular
+
+                            .form-check
+                                input.form-check-input(type="radio", name="ribbon", id="field_great_value", value="great_value", checked= (ribbon == "great_value"))
+                                label.form-check-label(for="field_great_value") Great Value
+
+                            .form-check
+                                input.form-check-input(type="radio", name="ribbon", id="field_pet_friendly", value="pet_friendly", checked= (ribbon == "pet_friendly"))
+                                label.form-check-label(for="field_pet_friendly") Pet Friendly
+
+                        //- ADDRESS -->
+                        .form-group
+                            label(for="address") #[strong Address]
+                            small.form-text Example format: #[em 1600 Amphitheatre Parkway, Mountain View, CA]
+
+                            input#address.form-control(name="address", type="text", required, value= address)
+
+                        //- Phone Number -->
+                        .form-group
+                            label(for="phone_number") #[strong Phone Number]
+                            small.form-text Example format: #[em 850-867-5309]
+
+                            input#phone_number.form-control(name="phone_number", type="text", value= phone_number)
+
+                        //- DESTINATION -->
+                        .form-group
+                            label(for="destination") #[strong Destination]
+                            small.form-text Where is this #[strong Hotel] located?
+
+                            div.input-group
+                                select#destination.custom-select(name="destination")
+                                    option(value="ANAHEIM"        , selected= destination=="ANAHEIM"          ) ANAHEIM
+                                    option(value="BRANSON"        , selected= destination=="BRANSON"          ) BRANSON
+                                    option(value="CANCUN"         , selected= destination=="CANCUN"           ) CANCUN
+                                    option(value="COCOA BEACH"    , selected= destination=="COCOA BEACH"      ) COCOA BEACH
+                                    option(value="DAYTONA BEACH"  , selected= destination=="DAYTONA BEACH"    ) DAYTONA BEACH
+                                    option(value="GATLINBURG"     , selected= destination=="GATLINBURG"       ) GATLINBURG
+                                    option(value="HOUSTON"        , selected= destination=="HOUSTON"          ) HOUSTON
+                                    option(value="LAS VEGAS"      , selected= destination=="LAS VEGAS"        ) LAS VEGAS
+                                    option(value="MESA"           , selected= destination=="MESA"             ) MESA
+                                    option(value="MIAMI"          , selected= destination=="MIAMI"            ) MIAMI
+                                    option(value="MYRTLE BEACH"   , selected= destination=="MYRTLE BEACH"     ) MYRTLE BEACH
+                                    option(value="NEW TORK CITY"  , selected= destination=="NEW TORK CITY"    ) NEW TORK CITY
+                                    option(value="OCOEE"          , selected= destination=="OCOEE"            ) OCOEE
+                                    option(value="ORLANDO"        , selected= destination=="ORLANDO"          ) ORLANDO
+                                    option(value="ORLANDO SOUTH"  , selected= destination=="ORLANDO SOUTH"    ) ORLANDO SOUTH
+                                    option(value="PARK CITY"      , selected= destination=="PARK CITY"        ) PARK CITY
+                                    option(value="PORT CANAVERAL" , selected= destination=="PORT CANAVERAL"   ) PORT CANAVERAL
+                                    option(value="PORT EVERGLADES", selected= destination=="PORT EVERGLADES"  ) PORT EVERGLADES
+                                    option(value="TEST LOCATION"  , selected= destination=="TEST LOCATION"    ) TEST LOCATION
+                                    option(value="TUNICA"         , selected= destination=="TUNICA"           ) TUNICA
+                                    option(value="WILLIAMSBURG"   , selected= destination=="WILLIAMSBURG"     ) WILLIAMSBURG
+                                    option(value="UNCATERGORIZED" , selected= destination=="UNCATERGORIZED"   ) UNCATERGORIZED
+
+                        //- LOCATION -->
+                        .form-group
+                            label(for="location") #[strong Location]
+                            small.form-text Example format: #[em Disney Springs Area]
+
+                            input#location.form-control(name="location", type="text", value= location)
+
+                        //- STAR RATING -->
+                        .form-group
+                            label(for="star_rating") #[strong Star Rating]
+                            input#address.form-control(name="star_rating", type="number", required, step=".5", min="0", max="5", value= star_rating)
+
+                        //- EXPEDIA -->
+                        .form-group
+                            label(for="expedia_link") #[strong Expedia Link]
+                            input.form-control(name="expedia_link",type="text", value= expedia_link)
+
+                        //- HOTEL AMENITIES
+                        .form-group
+                            p
+                                strong Hotel Amenities
+                            .container-fluid
+                                .row
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_flat_screen_tv", value="ha_flat_screen_tv", checked= (hotel_amenities.indexOf("ha_flat_screen_tv") > -1))
+                                        label.form-check-label(for="ha_flat_screen_tv") Flat Screen TV
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_free_wifi", value="ha_free_wifi", checked= (hotel_amenities.indexOf("ha_free_wifi") > -1))
+                                        label.form-check-label(for="ha_free_wifi") Free Wifi
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_pool", value="ha_pool", checked= (hotel_amenities.indexOf("ha_pool") > -1))
+                                        label.form-check-label(for="ha_pool") Pool
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_breakfast", value="ha_breakfast", checked= (hotel_amenities.indexOf("ha_breakfast") > -1))
+                                        label.form-check-label(for="ha_breakfast") Breakfast
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_pet_friendly", value="ha_pet_friendly", checked= (hotel_amenities.indexOf("ha_pet_friendly") > -1))
+                                        label.form-check-label(for="ha_pet_friendly") Pet Friendly
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_accessibility", value="ha_accessibility", checked= (hotel_amenities.indexOf("ha_accessibility") > -1))
+                                        label.form-check-label(for="ha_accessibility") Accessibility
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_self_parking", value="ha_self_parking", checked= (hotel_amenities.indexOf("ha_self_parking") > -1))
+                                        label.form-check-label(for="ha_self_parking") Self-Parking
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_bar", value="ha_bar", checked= (hotel_amenities.indexOf("ha_bar") > -1))
+                                        label.form-check-label(for="ha_bar") Bar/Lounge
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_spa", value="ha_spa", checked= (hotel_amenities.indexOf("ha_spa") > -1))
+                                        label.form-check-label(for="ha_spa") Spa
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_restaurant", value="ha_restaurant", checked= (hotel_amenities.indexOf("ha_restaurant") > -1))
+                                        label.form-check-label(for="ha_restaurant") Restaurant
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_park_shuttle", value="ha_park_shuttle", checked= (hotel_amenities.indexOf("ha_park_shuttle") > -1))
+                                        label.form-check-label(for="ha_park_shuttle") Theme Park Shuttle
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_gym", value="ha_gym", checked= (hotel_amenities.indexOf("ha_gym") > -1))
+                                        label.form-check-label(for="ha_gym") ATM
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_business_center", value="ha_business_center", checked= (hotel_amenities.indexOf("ha_business_center") > -1))
+                                        label.form-check-label(for="ha_business_center") Business Center
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_conference_space", value="ha_conference_space", checked= (hotel_amenities.indexOf("ha_conference_space") > -1))
+                                        label.form-check-label(for="ha_conference_space") Conference Space
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_room_service", value="ha_room_service", checked= (hotel_amenities.indexOf("ha_room_service") > -1))
+                                        label.form-check-label(for="ha_room_service") Room Service
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_picnic_area", value="ha_picnic_area", checked= (hotel_amenities.indexOf("ha_picnic_area") > -1))
+                                        label.form-check-label(for="ha_picnic_area") Picnic Area
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_elevator", value="ha_elevator", checked= (hotel_amenities.indexOf("ha_elevator") > -1))
+                                        label.form-check-label(for="ha_elevator") Elevator
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_barbecue_grill", value="ha_barbecue_grill", checked= (hotel_amenities.indexOf("ha_barbecue_grill") > -1))
+                                        label.form-check-label(for="ha_barbecue_grill") Barbecue Grill(s)
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_laundry_facilities", value="ha_laundry_facilities", checked= (hotel_amenities.indexOf("ha_laundry_facilities") > -1))
+                                        label.form-check-label(for="ha_laundry_facilities") Laundry Facilities
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_arcade", value="ha_arcade", checked= (hotel_amenities.indexOf("ha_arcade") > -1))
+                                        label.form-check-label(for="ha_arcade") Arcade/Game Room
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_24hr_front_desk", value="ha_24hr_front_desk", checked= (hotel_amenities.indexOf("ha_24hr_front_desk") > -1))
+                                        label.form-check-label(for="ha_24hr_front_desk") 24 hr Front Desk
+
+                                    .form-check.col-4
+                                        input.form-check-input(type="checkbox", name="hotel_amenities[]", id="ha_casino", value="ha_casino", checked= (hotel_amenities.indexOf("ha_casino") > -1))
+                                        label.form-check-label(for="ha_casino") Casino
+
+                        //- Hotel Images
+                        .form-group
+                            label(for="hotel_images") #[strong Hotel Images]
+                            .row
+                                each image, imageIndex in hotel_images
+                                    .col-4
+                                        .has-image
+                                            .hover
+                                                span.remove_image(aria-hidden="true", aria-label="Remove Image", onclick="removeMultipleImg(this, event)")
+
+                                            input(type="hidden", value=image, name="hotel_images[]")
+                                            img.img-fluid.img-thumbnail(src=image)
+
+                                        //- Add a delete button. On save, scan for new images and existing images
+                            input.form-control(name="new_hotel_images", type="file", multiple, accept="image/x-png,image/gif,image/jpeg,image/jpg")
+
+
+                    //- Room Data
+                    .tab-pane.fade#rooms(role="tabpanel", aria-labelledby="rooms-tab")
+
+                        //- Repeater Html Start
+                        div.repeater
+                            //- Repeater Heading
+                            div.repeater-heading.clearfix
+                                h2.float-left Rooms
+                                a.btn.btn-basic.float-right.repeater-add-btn Add Room
+
+                            //- Repeater Items -->
+                            ul.list-group.rooms
+                                - rooms = rooms.reverse() // Displays the data the same way the user inputted the data.
+                                each room, index in rooms
+                                    //- Repeater Item -->
+                                    li.list-group-item.item-content(data-index=(index+100))
+                                        //- SAMS Room Type
+                                        .form-group
+                                            label(for="sams_room_type") #[strong SAMS Room Type]
+                                            input.form-control(name="room["+(index+100)+"]sams_room_type", type="text", value=room.sams_room_type)
+
+                                        //- Title
+                                        .form-group
+                                            label(for="room_title") #[strong Room Title]
+                                            input.form-control(name="room["+(index+100)+"]room_title", type="text", value= room.room_title)
+
+                                        //- Occupancy
+                                        .form-group
+                                            label(for="room_occupancy") #[strong Occupancy]
+                                            input.form-control(name="room["+(index+100)+"]room_occupancy", type="number", value= room.room_occupancy)
+
+                                        //- Description
+                                        .form-group
+                                            label(for="room_desc") #[strong Description]
+                                            textarea.form-control(name="room["+(index+100)+"]room_desc", type="text", rows=5) #{room.room_desc}
+
+                                        //- Amenities
+                                        .form-group
+                                            label(for="room_amenities") #[strong Room Amenities]
+                                            textarea.form-control(name="room["+(index+100)+"]room_amenities", type="text", rows=5) #{room.room_amenities}
+
+                                        //- Featured image for HOTEL
+                                        .form-group
+                                            label(for="room["+(index+100)+"]featured_image") #[strong Featured Image]
+                                            .row.featured-image
+                                                if room.featured_image
+                                                    .col-4.featured-image-field
+                                                        input(type="hidden", name="room["+(index+100)+"]featured_image", value=room.featured_image)
+                                                        img.img-fluid.img-thumbnail(src=room.featured_image, alt="")
+                                                        a.remove-image(href="#", onclick="removeFeaturedImg(this, event,'room["+(index+100)+"]featured_image')") Remove Image
+                                                        //- $(this).parents('.featured-image-field').remove();
+                                                else
+                                                    .col.input
+                                                        input.form-control(name="room["+(index+100)+"]featured_image", type="file", accept="image/x-png,image/gif,image/jpeg,image/jpg")
+
+                                        hr
+
+                                        //- Images
+                                        .form-group
+                                            label(for="room_images") #[strong Room Images]
+                                            .row
+                                                each image, imageIndex in room.room_images
+                                                    .col-4
+                                                        .has-image
+                                                            .hover
+                                                                span.remove_image(aria-hidden="true", aria-label="Remove Image", onclick="removeMultipleImg(this, event)")
+
+                                                            input(type="hidden", value=image, name="room["+(index+100)+"]room_images[]")
+                                                            img.img-fluid.img-thumbnail(src=image)
+
+                                                        //- Add a delete button. On save, scan for new images and existing images
+                                            input.form-control(name="room["+(index+100)+"]new_room_images", type="file", multiple, accept="image/x-png,image/gif,image/jpeg,image/jpg")
+
+                                        .pull-right.repeater-remove-btn(style="margin-top:20px")
+                                            a.btn.btn-danger(onclick="$(this).parents('.rooms .item-content[data-index="+(index+100)+"]').remove()") Remove Room
+
+                            .items(data-group="room")
+                                ul.list-group
+                                    //- Repeater Item -->
+                                    li.list-group-item.item-content
+                                        //- SAMS Room Type
+                                        .form-group
+                                            label(for="sams_room_type") #[strong SAMS Room Type]
+                                            input.form-control(name="sams_room_type", type="text", data-name="sams_room_type")
+
+                                        //- Title
+                                        .form-group
+                                            label(for="room_title") #[strong Room Title]
+                                            input.form-control(name="room_title", type="text", data-name="room_title")
+
+                                        //- Occupancy
+                                        .form-group
+                                            label(for="room_occupancy") #[strong Occupancy]
+                                            input.form-control(name="room_occupancy", type="number", data-name="room_occupancy")
+
+                                        //- Description
+                                        .form-group
+                                            label(for="room_desc") #[strong Description]
+                                            textarea.form-control(name="room_desc", type="text", data-name="room_desc", rows=5)
+
+                                        //- Amenities
+                                        .form-group
+                                            label(for="room_amenities") #[strong Room Amenities]
+                                            textarea.form-control(name="room_amenities", type="text", data-name="room_amenities", rows=5)
+
+
+                                        //- Featured image for HOTEL
+                                        .form-group
+                                            label(for="featured_image") #[strong Featured Image]
+                                            input.form-control(name="featured_image", type="file", data-name="featured_image", accept="image/x-png,image/gif,image/jpeg,image/jpg")
+
+                                        //- Images
+                                        .form-group
+                                            label(for="room_images") #[strong Room Images]
+                                            input.form-control(name="room_images", type="file", data-name="room_images", multiple, accept="image/x-png,image/gif,image/jpeg,image/jpg")
+
+                                        .pull-right.repeater-remove-btn(style="margin-top:20px")
+                                            a.btn.btn-danger(onclick="$(this).parents('.items').remove()") Remove Room
+
+                        //- Repeater End -->
+
+                    //- English Descriptions -->
+                    .tab-pane.fade#english(role="tabpanel", aria-labelledby="english-tab")
+                        //- Short Description
+                        .form-group
+                            label(for="short_description") #[strong Short Description]
+                            textarea.form-control#short_description(name="short_description", rows="5") #{languages.english.short_description}
+
+                        //- Location Description
+                        .form-group
+                            label(for="long_description") #[strong Long Description]
+                            textarea.form-control#long_description(name="long_description", rows="5") #{languages.english.long_description}
+
+                        //- Dining
+                        .form-group
+                            label(for="dining") #[strong Dining]
+                            textarea.form-control#dining(name="dining", rows="5") #{languages.english.dining}
+
+                        //- Entertainment
+                        .form-group
+                            label(for="entertainment") #[strong Entertainment]
+                            textarea.form-control#entertainment(name="entertainment", rows="5") #{languages.english.entertainment}
+
+                        //- POINTS OF INTEREST
+                        .form-group
+                            label(for="points_of_interest") #[strong Points of Interest]
+                            textarea.form-control#points_of_interest(name="points_of_interest", rows="5") #{languages.english.points_of_interest}
+
+                        //- POLICIES
+                        .form-group
+                            label(for="policies") #[strong Policies]
+                            textarea.form-control#policies(name="policies", rows="5") #{languages.english.policies}
+
+                        //- LOCATION
+                        .form-group
+                            label(for="location_description") #[strong Location]
+                            textarea.form-control#location_description(name="location_description", rows="5") #{languages.english.location}
+
+                    //- Spanish Descriptions -->
+                    .tab-pane.fade#spanish(role="tabpanel", aria-labelledby="spanish-tab")
+                        //- Short Description
+                        .form-group
+                            label(for="short_description_es") #[strong Short Description]
+                            textarea.form-control#short_description_es(name="short_description_es", rows="5") #{languages.espanol.short_description}
+
+                        //- Location Description
+                        .form-group
+                            label(for="long_description_es") #[strong Long Description]
+                            textarea.form-control#long_description_es(name="long_description_es", rows="5") #{languages.espanol.long_description}
+
+                        //- Dining
+                        .form-group
+                            label(for="dining_es") #[strong Dining]
+                            textarea.form-control#dining_es(name="dining_es", rows="5") #{languages.espanol.dining}
+
+                        //- Entertainment
+                        .form-group
+                            label(for="entertainment_es") #[strong Entertainment]
+                            textarea.form-control#entertainment_es(name="entertainment_es", rows="5") #{languages.espanol.entertainment}
+
+                        //- POINTS OF INTEREST
+                        .form-group
+                            label(for="points_of_interest_es") #[strong Points of Interest]
+                            textarea.form-control#points_of_interest_es(name="points_of_interest_es", rows="5") #{languages.espanol.points_of_interest}
+
+                        //- POLICIES
+                        .form-group
+                            label(for="policies_es") #[strong Policies]
+                            textarea.form-control#policies_es(name="policies_es", rows="5") #{languages.espanol.policies}
+
+                        //- LOCATION
+                        .form-group
+                            label(for="location_description_es") #[strong Location]
+                            textarea.form-control#location_description_es(name="location_description_es", rows="5") #{languages.espanol.location}
+
+
+                    //- Business Data
+                    .tab-pane.fade#business(role="tabpanel", aria-labelledby="business-tab")
+                        //- HOTEL AMENITIES
+                        .form-group
+                            label(for="business_hotel_amenities") #[strong Hotel Amenities]
+                            small.form-text
+                                em Please use only bulleted lists
+                            textarea.form-control#business_hotel_amenities(name="business_hotel_amenities", rows="10") #{business.hotel_amenities}
+
+                        //- ORIGINAL PRICE
+                        .form-group
+                            label(for="original_price") #[strong Original price]
+                            small.form-text
+                                em Amount (to the nearest dollar)
+                            .input-group
+                                .input-group-prepend
+                                    span.input-group-text $
+                                input(type="number", step=1, class="form-control", name="original_price", value=business.original_price)
+                                .input-group-append
+                                    span.input-group-text .00
+
+                        //- FROM PRICE
+                        .form-group
+                            label(for="from_price") #[strong From Price]
+                            small.form-text
+                                em Amount (to the nearest dollar)
+                            .input-group
+                                .input-group-prepend
+                                    span.input-group-text $
+                                input(type="number", step=1, class="form-control", name="from_price", value=business.from_price)
+                                .input-group-append
+                                    span.input-group-text .00
+
+                        //- RESORT FEE
+                        .form-group
+                            label(for="resort_fee") #[strong Resort fee]
+                            small.form-text
+                                em Amount (to the nearest dollar)
+                            .input-group
+                                .input-group-prepend
+                                    span.input-group-text $
+                                input(type="number", step=1, class="form-control", name="resort_fee", value=business.resort_fee)
+                                .input-group-append
+                                    span.input-group-text .00
+                        //- FLEX TWO NIGHT PRICE
+                        .form-group
+                            label(for="original_price") #[strong Flex 2 Night Price]
+                            small.form-text
+                                em Amount (to the nearest dollar)
+                            .input-group
+                                .input-group-prepend
+                                    span.input-group-text From
+                                input(type="number", step=1, class="form-control", name="flex_two", value=flex.two_night)
+                                .input-group-append
+                                    span.input-group-text a night
+
+                        //- FLEX THREE NIGHT PRICE
+                        .form-group
+                            label(for="original_price") #[strong Flex 3 Night Price]
+                            small.form-text
+                                em Amount (to the nearest dollar)
+                            .input-group
+                                .input-group-prepend
+                                    span.input-group-text From
+                                input(type="number", step=1, class="form-control", name="flex_three", value=flex.three_night)
+                                .input-group-append
+                                    span.input-group-text a night
+
+                        //- FLEX FOUR NIGHT PRICE
+                        .form-group
+                            label(for="original_price") #[strong Flex 4 Night Price]
+                            small.form-text
+                                em Amount (to the nearest dollar)
+                            .input-group
+                                .input-group-prepend
+                                    span.input-group-text From
+                                input(type="number", step=1, class="form-control", name="flex_four", value=flex.four_night)
+                                .input-group-append
+                                    span.input-group-text a night
+
+                        //- EXTERNAL HOTEL ID
+                        .form-group
+                            label(for="external_hotel_id") #[strong External Hotel ID]
+                            input.form-control(name="external_hotel_id", type="text", value=business.external_hotel_id)
+
+                        //- TRIPADVISOR RATING
+                        .form-group
+                            label(for="tripadvisor") #[strong TripAdvisor Rating]
+                            small.form-text
+                                em Enter numerical star rating by intervals of .5
+                            .input-group
+                                input#address.form-control(name="tripadvisor", type="number", step=".5", min="0", max="5", value=tripadvisor)
+                                .input-group-append
+                                    span.input-group-text Stars
+
+            .col-lg-4
+                .card.card-primary.publishing-actions
+                    .card-header Publish
+                    .card-body
+                        p #[strong Created on:] #{created}
+                        //- p #[strong Created by:] #{createdBy}
+                        //- p #[strong Last Modified by:] #{modifiedBy}
+                        p #[strong Last modified on:] #{modified}
+                        hr
+                        div.clearfix
+                            a.btn.btn-default.float-left(href= "/hotel/delete/" + sams_id) Move to Trash
+                            button.btn.btn-primary.float-right(type="submit") Save Hotel
+
+                .card.card-primary
+                    .card-header Featured Hotel Image
+                    .card-body
+                        //- Featured image for HOTEL
+                        .form-group
+                            .featured-image
+                                if hotel_featured_image
+                                    .featured-image-field
+                                        input(type="hidden", name="hotel_featured_image", value=hotel_featured_image)
+                                        img.img-fluid.img-thumbnail(src=hotel_featured_image, alt="")
+                                        a.remove-image(href="#", onclick="removeFeaturedImg(this, event,'hotel_featured_image')") Remove Image
+                                else
+                                    img.img-fluid(src="https://via.placeholder.com/400x150?text=No+Image", id="hotel_featured_image", alt="")
+                                    input.form-control(name="hotel_featured_image", onchange="readURL(this);", type="file", accept="image/x-png,image/gif,image/jpeg,image/jpg")

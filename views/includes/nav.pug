@@ -1,0 +1,59 @@
+nav.sidebar.sidebar-offcanvas#sidebar
+    ul.nav
+        li.nav-item.nav-profile
+            a.nav-link(href="#")
+                div.nav-profile-image
+                    img(src="/images/faces/face1.jpg", alt="profile")
+                    span.login-status.offline
+
+                div.nav-profile-text.d-flex.flex-column
+                    span.font-weight-bold.mb-2 John Doe
+                    span.text-secondary.text-small Company Title
+
+        li.nav-item
+            a.nav-link(href="/")
+                span.menu-title Dashboard
+
+        li.nav-item
+            a.nav-link(data-toggle="collapse", href="#ui-basic", aria-expanded="false", aria-controls="ui-basic")
+                span.menu-title Hotels
+                i.menu-arrow
+
+            div.collapse#ui-basic
+                ul.nav.flex-column.sub-menu
+                    li.nav-item
+                        a.nav-link(href="/hotel/all") All Hotels
+                    li.nav-item
+                        a.nav-link(href="/hotel/add") Add New Hotel
+
+        li.nav-item
+            a.nav-link(data-toggle="collapse", href="#ui-interest", aria-expanded="false", aria-controls="ui-basic")
+                span.menu-title Things To Do
+                i.menu-arrow
+
+            .collapse#ui-interest
+                ul.nav.flex-column.sub-menu
+                    li.nav-item
+                        a.nav-link(href="/interest/all") All Interests
+                    li.nav-item
+                        a.nav-link(href="/interest/add") Add New Interest
+
+        //- li.nav-item
+        //-     a.nav-link(data-toggle="collapse", href="#general-pages", aria-expanded="false", aria-controls="general-pages")
+        //-         span.menu-title Description Data
+        //-         i.menu-arrow
+
+        //-     div.collapse#general-pages
+        //-         ul.nav.flex-column.sub-menu
+        //-             li.nav-item
+        //-                 a.nav-link(href="pages/samples/blank-page.html") Amenities
+        //-             li.nav-item
+        //-                 a.nav-link(href="pages/samples/login.html") Destinations
+        //-             li.nav-item
+        //-                 a.nav-link(href="pages/samples/register.html") Categores (Brands)
+        //-             li.nav-item
+        //-                 a.nav-link(href="pages/samples/error-404.html") Tags
+
+    div.footnote #{process.env.NODE_ENV}
+
+

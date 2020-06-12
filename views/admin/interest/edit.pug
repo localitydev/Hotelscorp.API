@@ -1,0 +1,281 @@
+extends ../../layout.pug
+
+block panel
+    form.content-wrapper(method="post", action= "/interest/update/" + interest_id)
+        .page-header
+            h2.page-title THINGS TO DO / #[span #{name}]
+        .row
+            .col#interest_add
+                ul.nav.nav-tabs#myTab(role="tablist")
+                    li.nav-item
+                        a.nav-link.active#home-tab(data-toggle="tab", href="#home", role="tab", aria-controls="home", aria-selected="true") Options
+                    li.nav-item
+                        a.nav-link#profile-tab(data-toggle="tab", href="#profile", role="tab", aria-controls="profile", aria-selected="false") Hours of Operation
+                    //- li.nav-item
+                    //-     a.nav-link#contact-tab(data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false") Coordinates
+                    li.nav-item
+                        a.nav-link#image-tab(data-toggle="tab" href="#image" role="tab" aria-controls="image" aria-selected="false") Extra Languages
+
+                .tab-content#myTabContent
+
+                    <!-- OPTIONS -->
+                    .tab-pane.fade.show.active#home(role="tabpanel" aria-labelledby="home-tab")
+
+                        .form-group
+                            label(for="name") #[strong Name]
+
+                            input.form-control(name="name",type="text", value= name)
+
+                        <!-- INTEREST TYPE -->
+                        .form-group
+                            label(for="interest_type") #[strong Interest Type]
+                            small.form-text What type of place is this interest?
+
+                            div.input-group
+                                select#interest_type.custom-select(name="interest_type")
+                                    option(value="Attractions", selected= interest_type=="Attractions" ) Attractions
+                                    option(value="Events", selected= interest_type=="Events" ) Events
+                                    option(value="Restaurants", selected= interest_type=="Restaurants" ) Restaurants
+                                    option(value="Shopping", selected= interest_type=="Shopping" ) Shopping
+                                    option(value="Nature", selected= interest_type=="Nature" ) Nature &amp; Parks
+                                    option(value="Concerts", selected= interest_type=="Concerts" ) Concerts
+                                    option(value="Landmarks", selected= interest_type=="Landmarks" ) Landmarks
+                                    option(value="Transportation", selected= interest_type=="Transportation" ) Transportation
+                                    option(value="Museums", selected= interest_type=="Museums" ) Museums
+
+                        <!-- DESTINATION -->
+                        .form-group
+                            label(for="destination") #[strong Destination]
+                            small.form-text Where is this interest located?
+
+                            div.input-group
+                                select#destination.custom-select(name="destination")
+                                    option(value="ANAHEIM",         selected= destination=="ANAHEIM"         ) ANAHEIM
+                                    option(value="BRANSON",         selected= destination=="BRANSON"         ) BRANSON
+                                    option(value="CANCUN",          selected= destination=="CANCUN"          ) CANCUN
+                                    option(value="COCOA BEACH",     selected= destination=="COCOA BEACH"     ) COCOA BEACH
+                                    option(value="DAYTONA BEACH",   selected= destination=="DAYTONA BEACH"   ) DAYTONA BEACH
+                                    option(value="GATLINBURG",      selected= destination=="GATLINBURG"      ) GATLINBURG
+                                    option(value="HOUSTON",         selected= destination=="HOUSTON"         ) HOUSTON
+                                    option(value="LAS VEGAS",       selected= destination=="LAS VEGAS"       ) LAS VEGAS
+                                    option(value="MESA",            selected= destination=="MESA"            ) MESA
+                                    option(value="MIAMI",           selected= destination=="MIAMI"           ) MIAMI
+                                    option(value="MYRTLE BEACH",    selected= destination=="MYRTLE BEACH"    ) MYRTLE BEACH
+                                    option(value="NEW TORK CITY",   selected= destination=="NEW TORK CITY"   ) NEW TORK CITY
+                                    option(value="OCOEE",           selected= destination=="OCOEE"           ) OCOEE
+                                    option(value="ORLANDO",         selected= destination=="ORLANDO"         ) ORLANDO
+                                    option(value="ORLANDO SOUTH",   selected= destination=="ORLANDO SOUTH"   ) ORLANDO SOUTH
+                                    option(value="PARK CITY",       selected= destination=="PARK CITY"       ) PARK CITY
+                                    option(value="PORT CANAVERAL",  selected= destination=="PORT CANAVERAL"  ) PORT CANAVERAL
+                                    option(value="PORT EVERGLADES", selected= destination=="PORT EVERGLADES" ) PORT EVERGLADES
+                                    option(value="TEST LOCATION",   selected= destination=="TEST LOCATION"   ) TEST LOCATION
+                                    option(value="TUNICA",          selected= destination=="TUNICA"          ) TUNICA
+                                    option(value="WILLIAMSBURG",    selected= destination=="WILLIAMSBURG"    ) WILLIAMSBURG
+                                    option(value="UNCATERGORIZED",  selected= destination=="UNCATERGORIZED"  ) UNCATERGORIZED
+
+                        <!-- ADDRESS -->
+                        .form-group
+                            label(for="address") #[strong Address]
+                            small.form-text Example format: #[em 1600 Amphitheatre Parkway, Mountain View, CA]
+
+                            input#address.form-control(name="address", type="text", value= address)
+
+                        <!-- SHORT DESCRIPTION -->
+                        .form-group
+                            label(for="short_description") #[strong Short Description]
+                            small.form-text Write 3-5 sentences about this interest.
+
+                            textarea.form-control#short_description(name="short_description", rows="5") #{languages.en.short_description}
+
+                        <!-- LONG DESCRIPTION -->
+                        .form-group
+                            label(for="long_description") #[strong Long Description]
+                            small.form-text Write in detail about this interest.
+
+                            textarea.form-control#long_description(name="long_description", rows="10") #{languages.en.long_description}
+
+                        <!-- External Link -->
+                        .form-group
+                            label(for="external_link") External Link
+                            small.form-text Does this interest have a website?
+
+                            input.form-control(name="external_link",type="text",value= external_link)
+
+                        <!-- Yelp ID -->
+                        .form-group
+                            label(for="yelp_id") #[strong Yelp ID]
+                            small.form-text API ID for interest on Yelp.
+
+                            input.form-control(name="yelp_id", type="text", value= yelp_id)
+
+                        <!-- Yelp Link -->
+                        .form-group
+                            label(for="yelp_link") #[strong Yelp Link]
+                            small.form-text Link to reviews on this place for Yelp
+
+                            input.form-control(name="yelp_link", type="text", value= yelp_link)
+
+                        <!-- Open Table ID -->
+                        .form-group
+                            label(for="open_table_id") #[strong Open Table ID]
+                            small.form-text API ID for interest on Open Table if interest has a menu.
+
+                            input.form-control(name="open_table_id",type="text", value= open_table_id)
+
+                        <!-- Open Table Link -->
+                        .form-group
+                            label(for="open_table_link") #[strong Open Table Link]
+                            small.form-text Link to Open Table for this interest
+
+                            input.form-control(name="open_table_link", type="text", value= open_table_link)
+
+                        <!-- Submit -->
+                        .form-group
+                            button.btn.btn-primary(type="submit") Save Interest
+
+                    <!-- HOURS OF OPERATION -->
+                    .tab-pane.fade#profile(role="tabpanel", aria-labelledby="profile-tab")
+                        <!-- Open All Day? -->
+                        .input-group
+                            .checkbox
+                                label(for="allday")
+                                    strong Is this place open all day? #[br]
+                                    input#allday(type="checkbox", name="allday" checked= hours_of_operation.allDay)
+                                    span Open 24 Hours
+
+                        hr
+
+                        h4 Sunday Hours
+
+                        .form-group
+                            label(for="sunday_open") #[strong Opens]
+                            small.form-text Example format: #[em 0900 CST]
+                            input.form-control(name="sunday_open", type="text", value= hours_of_operation.sunday.open)
+
+                        .form-group
+                            label(for="sunday_closed") #[strong Closes]
+                            small.form-text Example format: #[em 2300 CST]
+                            input.form-control(name="sunday_closed", type="text", value= hours_of_operation.sunday.close)
+
+                        hr
+
+                        h4 Monday Hours
+
+                        .form-group
+                            label(for="monday_open") #[strong Opens]
+                            small.form-text Example format: #[em 0900 CST]
+                            input.form-control(name="monday_open", type="text", value= hours_of_operation.monday.open)
+
+                        .form-group
+                            label(for="monday_closed") #[strong Closes]
+                            small.form-text Example format: #[em 2300 CST]
+                            input.form-control(name="monday_closed", type="text", value= hours_of_operation.monday.close)
+
+                        hr
+
+                        h4 Tuesday Hours
+
+                        .form-group
+                            label(for="tuesday_open") #[strong Opens]
+                            small.form-text Example format: #[em 0900 CST]
+                            input.form-control(name="tuesday_open", type="text", value= hours_of_operation.tuesday.open)
+
+                        .form-group
+                            label(for="tuesday_closed") #[strong Closes]
+                            small.form-text Example format: #[em 2300 CST]
+                            input.form-control(name="tuesday_closed", type="text", value= hours_of_operation.tuesday.close)
+
+                        hr
+
+                        h4 Wednesday Hours
+
+                        .form-group
+                            label(for="wednesday_open") #[strong Opens]
+                            small.form-text Example format: #[em 0900 CST]
+                            input.form-control(name="wednesday_open", type="text", value= hours_of_operation.wednesday.open)
+
+                        .form-group
+                            label(for="wednesday_closed") #[strong Closes]
+                            small.form-text Example format: #[em 2300 CST]
+                            input.form-control(name="wednesday_closed", type="text", value= hours_of_operation.wednesday.close)
+
+                        hr
+
+                        h4 Thursday Hours
+
+                        .form-group
+                            label(for="thursday_open") #[strong Opens]
+                            small.form-text Example format: #[em 0900 CST]
+                            input.form-control(name="thursday_open", type="text", value= hours_of_operation.thursday.open)
+
+                        .form-group
+                            label(for="thursday_closed") #[strong Closes]
+                            small.form-text Example format: #[em 2300 CST]
+                            input.form-control(name="thursday_closed", type="text", value= hours_of_operation.thursday.close)
+
+                        hr
+
+                        h4 Friday Hours
+
+                        .form-group
+                            label(for="friday_open") #[strong Opens]
+                            small.form-text Example format: #[em 0900 CST]
+                            input.form-control(name="friday_open", type="text", value= hours_of_operation.friday.open)
+
+                        .form-group
+                            label(for="friday_closed") #[strong Closes]
+                            small.form-text Example format: #[em 2300 CST]
+                            input.form-control(name="friday_closed", type="text", value= hours_of_operation.friday.close)
+
+                        hr
+
+                        h4 Saturday Hours
+
+                        .form-group
+                            label(for="saturday_open") #[strong Opens]
+                            .form-text Example format: #[em 0900 CST]
+                            input.form-control(name="saturday_open", type="text", value= hours_of_operation.saturday.open)
+
+                        .form-group
+                            label(for="saturday_closed") #[strong Closes]
+                            .form-text Example format: #[em 2300 CST]
+                            input.form-control(name="saturday_closed", type="text", value= hours_of_operation.saturday.close)
+
+                        .form-group
+                            button.btn.btn-primary(type="submit") Save Interest
+
+                    <!-- Coordinates -->
+                    //- .tab-pane.fade#contact(role="tabpanel", aria-labelledby="contact-tab")
+                    //-     .form-group
+                    //-         label(for="latitude") #[strong Latitude]
+                    //-         input.form-control(name="latitude", type="number", step="any", value= coordinates.latitude)
+
+                    //-     .form-group
+                    //-         label(for="longitude") #[strong Longitude]
+                    //-         input.form-control(name="longitude", type="number", step="any", value= coordinates.longitude)
+
+                    //-     .form-group
+                    //-         button.btn.btn-primary(type="submit") Save Interest
+
+                    .tab-pane.fade#image(role="tabpanel", aria-labelledby="image-tab")
+                        h4 Español
+                        //- .form-group
+                        //-     label(for="espanol-name") #[strong Name]
+                        //-     input.form-control(name="espanol_name", type="text")
+
+                        <!-- SHORT DESCRIPTION -->
+                        .form-group
+                            label(for="espanol_short_description") #[strong Short Description]
+                            .form-text Write 3-5 sentences about this interest.
+
+                            textarea.form-control#espanol_short_description(name="espanol_short_description", rows="10") #{languages.es.short_description}
+
+                        <!-- LONG DESCRIPTION -->
+                        .form-group
+                            label(for="espanol_long_description") #[strong Long Description]
+                            .form-text Write in detail about this interest.
+
+                            textarea.form-control#espanol_long_description(name="espanol_long_description", rows="10") #{languages.es.long_description}
+
+                        .form-group
+                            button.btn.btn-primary(type="submit") Save Interest
